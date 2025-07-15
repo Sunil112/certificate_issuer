@@ -1,0 +1,83 @@
+Organizations:
+
+  - &University
+    Name: UniversityMSP
+    ID: UniversityMSP
+    MSPDir: crypto-config/peerOrganizations/university.example.com/msp
+    AnchorPeers:
+      - Host: peer0.university.example.com
+        Port: 7051
+
+  - &Student
+    Name: StudentMSP
+    ID: StudentMSP
+    MSPDir: crypto-config/peerOrganizations/student.example.com/msp
+    AnchorPeers:
+      - Host: peer0.student.example.com
+        Port: 9051
+
+  - &Employer
+    Name: EmployerMSP
+    ID: EmployerMSP
+    MSPDir: crypto-config/peerOrganizations/employer.example.com/msp
+    AnchorPeers:
+      - Host: peer0.employer.example.com
+        Port: 11051
+
+  - &OrdererOrg
+    Name: OrdererMSP
+    ID: OrdererMSP
+    MSPDir: crypto-config/ordererOrganizations/example.com/msp
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V2_0: true
+  Application: &ApplicationCapabilities
+    V2_0: true
+  Orderer: &OrdererCapabilities
+    V2_0: true
+
+Application: &ApplicationDefaults
+  Organizations:
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+  OrdererType: solo
+  Addresses:
+    - orderer.example.com:7050
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+  Organizations:
+  Capabilities:
+    <<: *OrdererCapabilities
+
+Channel: &ChannelDefaults
+  Capabilities:
+    <<: *ChannelCapabilities
+
+Profiles:
+
+  EducationGenesis:
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+    Consortiums:
+      SampleConsortium:
+        Organizations:
+          - *University
+          - *Student
+          - *Employer
+
+  EducationChannel:
+    Consortium: SampleConsortium
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *University
+        - *Student
+        - *Employer
