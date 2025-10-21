@@ -1,0 +1,27 @@
+OrdererOrgs:
+  - Name: OrdererOrg
+    Domain: example.com
+    Specs:
+      - Hostname: orderer
+
+PeerOrgs:
+  - Name: University
+    Domain: university.example.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: Student
+    Domain: student.example.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: Employer
+    Domain: employer.example.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1

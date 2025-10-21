@@ -1,0 +1,33 @@
+{
+  "name": "education-network",
+  "version": "1.0.0",
+  "organizations": {
+    "UniversityMSP": {
+      "mspid": "UniversityMSP",
+      "peers": [
+        "peer0.university.example.com"
+      ],
+      "certificateAuthorities": [
+        "ca.university.example.com"
+      ]
+    }
+  },
+  "peers": {
+    "peer0.university.example.com": {
+      "url": "grpc://localhost:7051"
+    }
+  },
+  "certificateAuthorities": {
+    "ca.university.example.com": {
+      "url": "http://localhost:7054",
+      "caName": "ca-university"
+    }
+  },
+  "channels": {
+    "education-channel": {
+      "peers": {
+        "peer0.university.example.com": {}
+      }
+    }
+  }
+}

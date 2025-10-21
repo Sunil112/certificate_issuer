@@ -1,0 +1,59 @@
+{
+  "name": "education-network",
+  "version": "1.0.0",
+  "client": {
+    "organization": "EmployerMSP",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        }
+      }
+    }
+  },
+  "organizations": {
+    "EmployerMSP": {
+      "mspid": "EmployerMSP",
+      "peers": [
+        "peer0.employer.example.com"
+      ],
+      "certificateAuthorities": [
+        "ca.employer.example.com"
+      ]
+    }
+  },
+  "peers": {
+    "peer0.employer.example.com": {
+      "url": "grpc://localhost:11051"
+    }
+  },
+  "certificateAuthorities": {
+    "ca.employer.example.com": {
+      "url": "http://localhost:7054",
+      "caName": "ca-employer",
+      "httpOptions": {
+        "verify": false
+      }
+    }
+  },
+  "channels": {
+    "education-channel": {
+      "orderers": [
+        "orderer.example.com"
+      ],
+      "peers": {
+        "peer0.employer.example.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  },
+  "orderers": {
+    "orderer.example.com": {
+      "url": "grpc://localhost:7050"
+    }
+  }
+}

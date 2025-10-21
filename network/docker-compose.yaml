@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+
+  orderer.example.com:
+    image: hyperledger/fabric-orderer:2.5
+    container_name: orderer.example.com
+    environment:
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+    volumes:
+      - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/genesis.block
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp
+    ports:
+      - 7050:7050
+    networks:
+      - fabric
+
+  peer0.university.example.com:
+    image: hyperledger/fabric-peer:2.5
+    container_name: peer0.university.example.com
+    environment:
+      - CORE_PEER_ID=peer0.university.example.com
+      - CORE_PEER_LOCALMSPID=UniversityMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/university.example.com/peers/peer0.university.example.com/msp:/etc/hyperledger/fabric/msp
+    ports:
+      - 7051:7051
+    networks:
+      - fabric
+
+  peer0.student.example.com:
+    image: hyperledger/fabric-peer:2.5
+    container_name: peer0.student.example.com
+    environment:
+      - CORE_PEER_ID=peer0.student.example.com
+      - CORE_PEER_LOCALMSPID=StudentMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/student.example.com/peers/peer0.student.example.com/msp:/etc/hyperledger/fabric/msp
+    ports:
+      - 9051:7051
+    networks:
+      - fabric
+
+  peer0.employer.example.com:
+    image: hyperledger/fabric-peer:2.5
+    container_name: peer0.employer.example.com
+    environment:
+      - CORE_PEER_ID=peer0.employer.example.com
+      - CORE_PEER_LOCALMSPID=EmployerMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/employer.example.com/peers/peer0.employer.example.com/msp:/etc/hyperledger/fabric/msp
+    ports:
+      - 11051:7051
+    networks:
+      - fabric
+
+networks:
+  fabric:
