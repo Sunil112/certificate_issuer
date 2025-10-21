@@ -1,0 +1,18 @@
+{
+  "name": "certificate-network-test",
+  "version": "1.0.0",
+  "description": "Integration tests for Digital Certificate Issuance System on Hyperledger Fabric",
+  "main": "test-chaincode.js",
+  "scripts": {
+    "test": "node test-chaincode.js"
+  },
+  "dependencies": {
+    "fabric-network": "^2.2.0",
+    "fabric-ca-client": "^2.2.0",
+    "fabric-common": "^2.2.0",
+    "grpc": "^1.24.2",
+    "protobufjs": "^6.8.8"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
