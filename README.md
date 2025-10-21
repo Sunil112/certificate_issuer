@@ -131,6 +131,3 @@ curl -X POST http://localhost:4000/api/issue \
 * Multi-organization Fabric network for consortium use.
 * Blockchain explorer integration for transparency.
 
-
-Would you like me to **add badges (build, license, version, etc.)** and **GitHub markdown styling (logos, emoji sections, etc.)** to make it look more professional?
-I can also generate this as a **README.md file** you can directly upload to your repo.
